@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影片色彩追蹤系統</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1>🎥 影片色彩追蹤系統</h1>
+                <p class="subtitle">上傳影片，選擇畫面一點，記錄該位置的顏色變化</p>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="panel panel-left">
+                <div class="card upload-card">
+                    <h2>上傳影片</h2>
+                    <p>支援本機影片檔案，點擊下方區域選取影片後即可播放。</p>
+                    <label class="file-dropzone" for="videoInput" id="dropZone">
+                        <span>拖曳影片到此或點選選擇影片</span>
+                        <input type="file" id="videoInput" accept="video/*">
+                    </label>
+                    <div class="hint">支援 MP4、WebM、MOV 等影片格式</div>
+                </div>
+
+                <div class="card info-card">
+                    <h2>色彩資訊</h2>
+                    <div class="color-panel">
+                        <div class="color-preview" id="colorPreview"></div>
+                        <div>
+                            <div class="info-row"><strong>座標：</strong><span id="pointCoords">尚未選取</span></div>
+                            <div class="info-row"><strong>顏色：</strong><span id="colorCode">#------</span></div>
+                            <div class="info-row"><strong>時間：</strong><span id="currentTime">00:00</span></div>
+                        </div>
+                    </div>
+                    <div class="hsl-panel">
+                        <div class="hue-controls">
+                            <button class="btn-secondary btn-toggle" id="toggleHueBtn" type="button">圓環</button>
+                            <div class="hue-display" id="hueDisplay">
+                                <div class="hue-ring" id="hueRing">
+                                    <div class="hue-pointer" id="huePointer"></div>
+                                </div>
+                                <div class="hue-bar" id="hueBar" hidden></div>
+                            </div>
+                        </div>
+
+                        <div class="hl-bars">
+                            <div class="bar-row">
+                                <div class="bar-label">彩度</div>
+                                <div class="bar-track"><div class="bar-fill" id="satFill"></div></div>
+                                <div class="bar-value" id="satValue">0%</div>
+                            </div>
+                            <div class="bar-row">
+                                <div class="bar-label">明度</div>
+                                <div class="bar-track"><div class="bar-fill" id="lightFill"></div></div>
+                                <div class="bar-value" id="lightValue">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-primary" id="startRecordBtn" disabled>開始記錄</button>
+                        <button class="btn-secondary" id="stopRecordBtn" disabled>停止記錄</button>
+                    </div>
+                    <button class="btn-secondary" id="exportBtn" disabled>下載記錄</button>
+                </div>
+            </section>
+
+            <section class="panel panel-right">
+                <div class="video-card">
+                    <div class="video-header">
+                        <h2>影片預覽</h2>
+                        <span class="small-note">點擊影片畫面選取顏色採樣點</span>
+                    </div>
+                    <div class="video-wrapper" id="videoWrapper">
+                        <video id="videoPlayer" controls crossorigin="anonymous"></video>
+                        <div id="marker" class="marker"></div>
+                    </div>
+                    <div class="note">請先上傳影片，再在影片畫面中點選想要追蹤的位置。</div>
+                </div>
+
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <h2>顏色紀錄</h2>
+                        <div class="timeline-header-meta">
+                            <span id="recordCount">0 條記錄</span>
+                            <button class="btn-secondary btn-toggle" id="toggleViewBtn" type="button">長條顯示</button>
+                        </div>
+                    </div>
+                    <div class="timeline-list" id="timelineList">
+                        <div class="empty-state timeline-empty">尚未開始記錄</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <canvas id="hiddenCanvas" width="640" height="360" hidden></canvas>
+    <script src="script.js"></script>
+</body>
+</html>
