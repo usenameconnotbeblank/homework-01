@@ -400,25 +400,10 @@ class VideoColorTracker {
 
     toggleHueView() {
         if (!this.hueRing || !this.hueBar || !this.toggleHueBtn) return;
-        const isRing = !this.hueBar.hidden;
-        // if currently bar visible, switch to ring
-        this.hueBar.hidden = isRing;
-        this.hueRing.style.display = isRing ? 'block' : '';
-        this.toggleHueBtn.textContent = isRing ? '圓環' : '長條';
-        // flip logic: if was ring (hueBar.hidden true), show bar
-        if (isRing) {
-            this.hueBar.hidden = false;
-        } else {
-            this.hueBar.hidden = true;
-        }
-        // simpler: toggle based on hidden state
-        if (this.hueBar.hidden) {
-            this.hueRing.style.display = 'block';
-            this.toggleHueBtn.textContent = '圓環';
-        } else {
-            this.hueRing.style.display = 'none';
-            this.toggleHueBtn.textContent = '長條';
-        }
+        const showBar = this.hueBar.hidden;
+        this.hueBar.hidden = !showBar;
+        this.hueRing.style.display = showBar ? 'none' : 'block';
+        this.toggleHueBtn.textContent = showBar ? '圓環' : '長條';
     }
 
     rgbToHsl(r, g, b) {

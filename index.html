@@ -75,6 +75,17 @@
                         <h2>影片預覽</h2>
                         <span class="small-note">點擊影片畫面選取顏色採樣點</span>
                     </div>
+                    <div class="video-controls">
+                        <button class="btn-secondary" id="fastForwardBtn" type="button">快轉 5 秒</button>
+                        <button class="btn-secondary" id="skipToEndBtn" type="button" disabled>快轉到結尾並記錄</button>
+                        <label class="speed-label" for="speedSelect">播放速度</label>
+                        <select id="speedSelect" aria-label="播放速度">
+                            <option value="0.5">0.5x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2">2x</option>
+                        </select>
+                    </div>
                     <div class="video-wrapper" id="videoWrapper">
                         <video id="videoPlayer" controls crossorigin="anonymous"></video>
                         <div id="marker" class="marker"></div>
